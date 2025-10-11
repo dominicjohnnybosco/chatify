@@ -39,9 +39,9 @@ export const register = async (req, res) => {
         });
 
         if ( newUser ) {
+            const savedUser = await newUser.save();
             // generate token for new user
-            generateToken(newUser._id, res);
-            await newUser.save();
+            generateToken(savedUser._id, res);
 
             res.status(201).json({ message: 'User Account Created Successfully'});
         } else {
