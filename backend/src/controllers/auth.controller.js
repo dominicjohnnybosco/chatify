@@ -61,4 +61,44 @@ export const register = async (req, res) => {
         console.log('Error While Creating Account in register controller:', error);
         res.status(500).json({ message: 'Internal Server Error'});
     }
+};
+
+
+export const login = async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        // check if fields are empty
+        if ( !email || !password) {
+            return res.status(400).json({ message: 'All Fields are required'});
+        };
+
+        // check if the user exists
+        const user = await User.findOne({email});
+        if ( !user ) {
+            return res.status(400).json({ message: 'Invalid Credentials'}); 
+        };
+
+        // check the provided password
+        const isPasswordCorrect = await bcrypt.compare(password, user.password);
+
+        if ( !isPasswordCorrect ) {
+            return res.status(400).json({ message: 'Invalid Credentials'});
+        };
+
+        // if user credentials are correct then generate token for the user
+        generateToken(user._id, res);
+
+        res.status(200).json({ message: 'Successfully logged in'});
+
+    } catch (error) {
+        console.error('Error in Login Controller:', error);
+        res.status(500).json({ message: 'Internal Server Error'});
+    }
+};
+
+
+export const logout = (_, res) => {
+    res.cookie("jwt","",{maxAge:0});
+    res.status(200).json({ message: 'Successfully Logged out'});
 }
