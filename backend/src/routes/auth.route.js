@@ -1,12 +1,12 @@
 import express from "express";
 import { register, login, logout, updateProfile } from "../controllers/auth.controller.js";
 import { protectedRoute } from "../middleware/auth.middleware.js";
-import { arcjetProctection } from "../middleware/arcjet.middleware.js";
+import { arcjetProtection } from "../middleware/arcjet.middleware.js";
 
 const router = express.Router();
 
 // use the rate limiting 
-router.use(arcjetProctection);
+router.use(arcjetProtection);
 
 router.post('/register', register);
 router.post('/login', login);
