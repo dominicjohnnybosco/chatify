@@ -47,7 +47,13 @@ export const register = async (req, res) => {
             // generate token for new user
             generateToken(savedUser._id, res);
 
-            res.status(201).json({ message: 'User Account Created Successfully'});
+            res.status(201).json({ 
+                _id: newUser._id,
+                username: newUser.username,
+                email: newUser.email,
+                profilePic: newUser.profilePic,
+                message: 'User Account Created Successfully'
+            });
 
             // Send Welcome Message to User
             try {
