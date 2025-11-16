@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAuthStore } from '../store/useAuthStore';
-import BorderAnimationContainer from "../components/BorderAnimatedContainer";
+import BorderAnimatedContainer from "../components/BorderAnimatedContainer";
 import { MessageCircleHeartIcon, LockIcon, MailIcon, LoaderIcon } from "lucide-react";
 import { Link } from 'react-router';
 
@@ -16,7 +16,7 @@ function LoginPage() {
   return (
     <div className='w-full flex items-center justify-center p-4 bg-slate-900'>
       <div className='relative w-full max-w-6xl md:h-[800px] h-[650px]'>
-        <BorderAnimationContainer>
+        <BorderAnimatedContainer>
           <div className='w-full flex flex-col md:flex-row'>
               {/* FORM COLUMN LEFT SIDE  */}
               <div className='md:w-1/2 p-8 flex items-center justify-center md:border-r border-slate-600/30'>
@@ -101,7 +101,7 @@ function LoginPage() {
 
               {/* END FORM COLUMN RIGHT SIDE */}
           </div>
-        </BorderAnimationContainer>
+        </BorderAnimatedContainer>
       </div>
     </div>
   )
